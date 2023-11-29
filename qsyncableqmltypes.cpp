@@ -3,6 +3,8 @@
 #include "qsuuid.h"
 #include "qsyncableqmlwrapper.h"
 
+namespace QSyncable{
+
 template <typename T>
 static QObject *provider(QQmlEngine *engine, QJSEngine *scriptEngine) {
     Q_UNUSED(engine);
@@ -25,9 +27,7 @@ void registerQSyncableTypes() {
     qmlRegisterSingletonType<QSUuid>("QSyncable", 1, 0, "Uuid", provider<QSUuid>);
     qmlRegisterSingletonType<QSyncableQmlWrapper>("QSyncable", 1, 0, "QSyncable", provider<QSyncableQmlWrapper>);
 }
-
-
-
 #ifndef QSYNCABLE_DISABLE_AUTO_QML_REGISTER
 Q_COREAPP_STARTUP_FUNCTION(registerQSyncableTypes)
 #endif
+}

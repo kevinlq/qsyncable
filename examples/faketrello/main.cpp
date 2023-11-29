@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     Q_UNUSED(app);
-    registerQSyncableTypes();
+    QSyncable::registerQSyncableTypes();
     AppDelegate delegate;
 
     return delegate.run();
