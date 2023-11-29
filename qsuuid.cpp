@@ -1,5 +1,11 @@
 #include <QUuid>
 #include <QtQml>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+#include <QRegExp>
+#else
+#include <QRegularExpression>
+#endif
+
 #include "qsuuid.h"
 
 /*! \qmltype Uuid
@@ -21,5 +27,9 @@ QSUuid::QSUuid(QObject *parent) : QObject(parent)
 
 QString QSUuid::create() const
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     return QUuid::createUuid().toString().replace(QRegExp("[{}]"), "");
+#else
+    return QUuid::createUuid().toString().replace(QRegularExpression("[{}]"), "");
+#endif
 }
